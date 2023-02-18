@@ -25,6 +25,19 @@ body {
   padding: 0 15px;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
 p,
 h1,
 h2,
@@ -35,10 +48,20 @@ h6 {
   margin-top: 0;
 }
 
-.our-feature,
-.our-works,
-.our-team {
-  padding: 120px 0;
+.list {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.feature,
+.works,
+.team {
+  padding-bottom: 120px;
 }
 
 /* шапка */
@@ -46,16 +69,75 @@ h6 {
 .heder {
   background: var(--color-primary-inverted);
   border-bottom: 1px solid var(--color-footer-text);
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.list,
-.header-list {
+.heder-container {
+  display: flex;
+}
+
+/* навігація */
+.nav {
+  display: flex;
+  align-items: center;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 40px;
   margin: 0;
-  padding: 0;
-  list-style: none;
+  padding-left: 0;
 }
 
+.nav-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-link :focus {
+  color: var(--color-hover);
+}
+
+.nav-list .nav-link.current {
+  color: var(--color-hover);
+}
+
+/* адрес */
+.address {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+}
+
+.address-list {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin: 0;
+  padding-left: 0;
+}
+
+.link-address {
+  color: var(--color-secondary);
+  text-decoration: none;
+  font-style: normal;
+}
+
+.link-address:hover,
+:focus {
+  color: var(--color-hover);
+}
+
+/* логотип */
 .logo-header {
+  margin-right: 76px;
   color: var(--color-primary);
   text-decoration: none;
   font-family: "Raleway";
@@ -69,39 +151,15 @@ h6 {
   color: var(--color-secondary-inverted);
 }
 
-/* посилання в шапці */
-
-.header-link {
-  color: var(--color-primary);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.header-link:hover,
-.header-link :focus {
-  color: var(--color-hover);
-}
-
-.header-list .header-link.current {
-  color: var(--color-hover);
-}
-
-/* адреса */
-.link-address {
-  color: var(--color-secondary);
-  text-decoration: none;
-  font-style: normal;
-}
-
-.link-address:hover,
-:focus {
-  color: var(--color-hover);
-}
 /* герой */
 .hero {
-  padding: 188px 472px;
+  padding-top: 188px;
+  padding-bottom: 188px;
   background: var(--color-primary);
   text-align: center;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .button-servise {
   color: var(--color-inverted);
@@ -116,6 +174,7 @@ h6 {
   line-height: 1.5;
   letter-spacing: 0.04em;
   text-align: center;
+  padding: 16px 32px;
 }
 
 .button-servise:hover,
@@ -125,7 +184,8 @@ h6 {
 }
 
 .hero-title {
-  margin-bottom: 48px;
+  margin: 0 auto 48px auto;
+  width: 496px;
   color: var(--color-primary-inverted);
   font-size: 56px;
   line-height: 1.07;
@@ -133,8 +193,20 @@ h6 {
 }
 
 /* особливості */
-
-.our-feature {
+.feature {
+  padding-top: 120px;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.feature-list {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding-left: 0;
+}
+.feature-list-item {
+  flex-basis: calc((100% - 72px) / 4);
 }
 
 .feature-titles {
@@ -146,9 +218,25 @@ h6 {
 }
 
 /* наші роботи */
+.works {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.works-list {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding-left: 0;
+}
+
+.works-list-item {
+  flex-basis: calc((100% - 48px) / 3);
+}
 
 .section-title {
   margin-bottom: 72px;
+
   color: var(--color-primary);
   font-size: 36px;
   line-height: 1.11;
@@ -158,30 +246,53 @@ h6 {
 
 /* наша команда */
 
-.our-team {
+.team {
   background-color: var(--color-inverted);
+  padding-top: 120px;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.team-list {
+  display: flex;
+  justify-content: space-between;
+
+  padding-left: 0;
+  margin: 0;
+}
+
+.team-list-item {
+  text-align: center;
+  flex-basis: calc((100% - 72px) / 4);
+  background: var(--color-primary-inverted);
+  box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
+    0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+  border-radius: 0px 0px 4px 4px;
 }
 
 .team-title {
+  margin-top: 32px;
   margin-bottom: 8px;
   font-weight: 500;
   font-size: 20px;
   line-height: 1.2;
-  text-align: center;
 }
 
-.team-description {
+.team-text {
   margin-bottom: 32px;
-  text-align: center;
 }
 
 /* підвал */
 .footer {
   padding: 100px 0;
   background-color: var(--color-primary);
+  max-width: 1440px;
+  max-height: 310px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .logo-footer {
-  margin-bottom: 16px;
   color: var(--color-inverted);
   text-decoration: none;
   font-family: "Raleway";
@@ -197,7 +308,11 @@ h6 {
 }
 
 .footer-text {
+  margin: 16px 0 0 0;
+
   color: var(--color-footer-text);
+  width: 264px;
+  height: 72;
 }
 
 /*  СТОРІНКА ПОРТФОЛІО */
@@ -205,11 +320,19 @@ h6 {
 .section-filter {
   padding-top: 96px;
   padding-bottom: 120px;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* кнопки */
-.buton {
-  margin-bottom: 72px;
+.filter-list {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding-bottom: 72px;
+  padding-left: 0;
+  margin: 0;
 }
 
 .filter-button {
@@ -223,6 +346,7 @@ h6 {
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
+  padding: 12px 24px;
 }
 
 .filter-button:hover,
@@ -231,8 +355,31 @@ h6 {
   background-color: var(--color-hover);
 }
 
+.portfolio-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 0;
+  padding-left: 0;
+}
+
+.portfolio-list-item {
+  display: flex;
+  flex-direction: column;
+  flex-basis: calc((100 - 48px) / 3);
+}
+
+.portfolio-container {
+  border: 1px solid var(--color-footer-text);
+  border-top: none;
+  padding-left: 16px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
 .portfolio-title {
   margin-bottom: 8px;
+
   color: var(--color-primary);
   font-weight: 500;
   font-size: 20px;
@@ -240,6 +387,6 @@ h6 {
 }
 
 .portfolio-text {
-  margin-bottom: 32px;
   color: var(--color-secondary);
+  margin: 0;
 }
